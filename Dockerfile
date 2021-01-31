@@ -24,7 +24,9 @@ RUN apt-get -y update && apt-get -y upgrade && \
     apt-get clean
 
 COPY --from=build /opt/zookeeper.tgz /opt/
-RUN tar -zxf /opt/zookeeper.tgz -C /opt/ && rm -f /opt/zookeeper.tgz && ln -s /opt/zookeeper-* /opt/zookeeper
+RUN tar -zxf /opt/zookeeper.tgz -C /opt/ && rm -f /opt/zookeeper.tgz && \
+ln -s /opt/apache-* /opt/zookeeper && \
+mv /opt/zookeeper/conf/zoo_sample.cfg /opt/zookeeper/conf/zoo.cfg
 
 WORKDIR /opt/zookeeper
 
